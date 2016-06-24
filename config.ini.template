@@ -1,3 +1,6 @@
+;The domain on which the NPN services are located. Usually just default.
 domain=www.usanpn.org
+;This controls the path where the Excel files should be generated
 output_path=./
+;Each Excel files is tagged with an author. This allows you to customize the author name
 author=Ellen Denny
