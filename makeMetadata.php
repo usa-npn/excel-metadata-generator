@@ -33,7 +33,7 @@ define("SITE_TYPE", 'site_summarized');
 $ancilliary_types = array(
     'ancillary_dataset' => 'dataset', 
     'ancillary_person' => 'person', 
-    'ancillary_site' => 'station', 
+    'ancillary_site' => 'station',
     'ancillary_individual_plant' => 'plant', 
     'ancillary_protocol' => 'protocol', 
     'ancillary_species_protocol' => 'species_protocol', 
@@ -93,19 +93,19 @@ $book_ancilliary->setActiveSheetIndex(0);
  * Write all the files to disk
  */		
 $objWriter = new PHPExcel_Writer_Excel2007($book_composite);
-$objWriter->save(OUTPUT_PATH . 'all_types_observation_metadata.xlsx');
+$objWriter->save(OUTPUT_PATH . 'all_datafield_descriptions.xlsx');
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_raw);
-$objWriter->save(OUTPUT_PATH . 'raw_status_observation_metadata.xlsx');
+$objWriter->save(OUTPUT_PATH . 'status_intensity_datafield_descriptions.xlsx');
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_individual_summarize);
-$objWriter->save(OUTPUT_PATH . 'individual-level_summarized_observation_metadata.xlsx');
+$objWriter->save(OUTPUT_PATH . 'individual_phenometrics_datafield_descriptions.xlsx');
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_site_summarize);
-$objWriter->save(OUTPUT_PATH . 'site-level_summarized_observation_metadata.xlsx');
+$objWriter->save(OUTPUT_PATH . 'site_phenometrics_datafield_descriptions.xlsx');
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_ancilliary);
-$objWriter->save(OUTPUT_PATH . 'ancilliary_metadata.xlsx');
+$objWriter->save(OUTPUT_PATH . 'ancillary_datafield_descriptions.xlsx');
 
 
 /**
