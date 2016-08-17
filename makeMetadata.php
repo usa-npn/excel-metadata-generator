@@ -31,17 +31,17 @@ define("INDIVIDUAL_TYPE", 'individual_summarized');
 define("SITE_TYPE", 'site_summarized');
 
 $ancilliary_types = array(
-    'ancillary_dataset' => 'dataset', 
-    'ancillary_person' => 'person', 
-    'ancillary_site' => 'station',
-    'ancillary_individual_plant' => 'plant', 
-    'ancillary_protocol' => 'protocol', 
-    'ancillary_species_protocol' => 'species_protocol', 
-    'ancillary_phenophase' => 'phenophase', 
-    'ancillary_phenophase_def' => 'phenophase_definition', 
-    'ancillary_spp-specific' => 'sspi', 
-    'ancillary_intensity' => 'intensity', 
-    'ancillary_obs_group' => 'observation_group'
+    'Dataset' => 'dataset', 
+    'Person' => 'person', 
+    'Site' => 'station',
+    'Individual_Plant' => 'plant', 
+    'Protocol' => 'protocol', 
+    'Species_Protocol' => 'species_protocol', 
+    'Phenophase' => 'phenophase', 
+    'Phenophase_Definition' => 'phenophase_definition', 
+    'Species-Specific_Info' => 'sspi', 
+    'Intensity' => 'intensity', 
+    'Site_Visit' => 'observation_group'
     );
 
 include 'Classes/PHPExcel.php';
@@ -53,26 +53,26 @@ include 'Classes/PHPExcel/Writer/Excel2007.php';
  * Setup all the various workbooks to generate, including the composite
  * book which will contain all the sheets added to the other books.
  */
-$book_composite = createWorkbook("Data Field Metadata for Raw and Summarized Observation Data", "", "");
+$book_composite = createWorkbook("Datafield Descriptions for Status-Intensity and Phenometrics Data", "", "");
 $book_composite->createSheet();
 $book_composite->createSheet();
 
-$book_raw = createWorkbook("Data Field Metadata for Raw Status Observation Data", "", "");
-$book_individual_summarize = createWorkbook("Data Field Metadata for Individual-level Summarized Observation Data", "", "");
-$book_site_summarize = createWorkbook("Data Field Metadata for Site-level Summarized Observation Data", "", "");
+$book_raw = createWorkbook("Datafield Descriptions for Status and Intensity Observation Data", "", "");
+$book_individual_summarize = createWorkbook("Datafield Descriptions for Individual Phenometrics Data", "", "");
+$book_site_summarize = createWorkbook("Datafield Descriptions for Site Phenometrics Data", "", "");
 
-$book_ancilliary = createWorkbook("Data Field Metadata for Dataset Data", "", "");
-
-
-addSheet($book_composite, 0, 'Raw', RAW_TYPE);
-addSheet($book_raw, 0, 'Raw', RAW_TYPE);
-
-addSheet($book_composite, 1, 'Individual-Summarized', INDIVIDUAL_TYPE);
-addSheet($book_individual_summarize, 0, 'Individual-Summarized', INDIVIDUAL_TYPE);
+$book_ancilliary = createWorkbook("Datafield Descriptions for Ancillary Observation Data", "", "");
 
 
-addSheet($book_composite, 2, 'Site-Summarized', SITE_TYPE);
-addSheet($book_site_summarize, 0, 'Site-Summarized', SITE_TYPE);
+addSheet($book_composite, 0, 'Status-Intensity Data', RAW_TYPE);
+addSheet($book_raw, 0, 'Status-Intensity Data', RAW_TYPE);
+
+addSheet($book_composite, 1, 'Individual Phenometrics', INDIVIDUAL_TYPE);
+addSheet($book_individual_summarize, 0, 'Individual Phenometrics', INDIVIDUAL_TYPE);
+
+
+addSheet($book_composite, 2, 'Site Phenometrics', SITE_TYPE);
+addSheet($book_site_summarize, 0, 'Site Phenometrics', SITE_TYPE);
 
 $num_ancilliary_sheets = 0;
 
