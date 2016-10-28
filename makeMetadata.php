@@ -126,6 +126,7 @@ function createWorkbook($title, $subject, $description){
 
 /**
 Generic function for adding a sheet.
+This is a test comment.
 */
 function addSheet(&$object, $sheet_indx, $title, $type){
     $object->setActiveSheetIndex($sheet_indx);
