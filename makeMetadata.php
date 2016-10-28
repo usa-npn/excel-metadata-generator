@@ -124,7 +124,9 @@ function createWorkbook($title, $subject, $description){
     return $object;
 }
 
-
+/**
+Generic function for adding a sheet.
+*/
 function addSheet(&$object, $sheet_indx, $title, $type){
     $object->setActiveSheetIndex($sheet_indx);
     addHeaders($object);
