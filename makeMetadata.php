@@ -29,6 +29,7 @@ define('BASE_ENDPOINT', 'http://' . DOMAIN . '/npn_portal/metadata/getMetadataFi
 define('RAW_TYPE', 'raw');
 define("INDIVIDUAL_TYPE", 'individual_summarized');
 define("SITE_TYPE", 'site_summarized');
+define("MAGNITUDE_TYPE", 'magnitude');
 
 $ancilliary_types = array(
     'Dataset' => 'dataset', 
@@ -56,10 +57,12 @@ include 'Classes/PHPExcel/Writer/Excel2007.php';
 $book_composite = createWorkbook("Datafield Descriptions for Status-Intensity and Phenometrics Data", "", "");
 $book_composite->createSheet();
 $book_composite->createSheet();
+$book_composite->createSheet();
 
 $book_raw = createWorkbook("Datafield Descriptions for Status and Intensity Observation Data", "", "");
 $book_individual_summarize = createWorkbook("Datafield Descriptions for Individual Phenometrics Data", "", "");
 $book_site_summarize = createWorkbook("Datafield Descriptions for Site Phenometrics Data", "", "");
+$book_magnitude = createWorkbook("Datafield Descriptions for Magnitude Phenometrics Data", "", "");
 
 $book_ancilliary = createWorkbook("Datafield Descriptions for Ancillary Observation Data", "", "");
 
@@ -73,6 +76,9 @@ addSheet($book_individual_summarize, 0, 'Individual Phenometrics', INDIVIDUAL_TY
 
 addSheet($book_composite, 2, 'Site Phenometrics', SITE_TYPE);
 addSheet($book_site_summarize, 0, 'Site Phenometrics', SITE_TYPE);
+
+addSheet($book_composite, 3, 'Magnitude Phenometrics', MAGNITUDE_TYPE);
+addSheet($book_magnitude, 0, 'Magnitude Phenometrics', MAGNITUDE_TYPE);
 
 $num_ancilliary_sheets = 0;
 
@@ -103,6 +109,9 @@ $objWriter->save(OUTPUT_PATH . 'individual_phenometrics_datafield_descriptions.x
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_site_summarize);
 $objWriter->save(OUTPUT_PATH . 'site_phenometrics_datafield_descriptions.xlsx');
+
+$objWriter = new PHPExcel_Writer_Excel2007($book_magnitude);
+$objWriter->save(OUTPUT_PATH . 'magnitude_phenometrics_datafield_descriptions.xlsx');
 
 $objWriter = new PHPExcel_Writer_Excel2007($book_ancilliary);
 $objWriter->save(OUTPUT_PATH . 'ancillary_datafield_descriptions.xlsx');
