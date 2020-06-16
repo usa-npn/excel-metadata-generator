@@ -10,7 +10,10 @@
  * 
  * 
  */
+require 'vendor/autoload.php';
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 /**
@@ -44,11 +47,6 @@ $ancilliary_types = array(
     'Intensity' => 'intensity', 
     'Site_Visit' => 'observation_group'
     );
-
-include 'Classes/PHPExcel.php';
-PHPExcel_Settings::setZipClass(PHPExcel_Settings::PCLZIP);
-include 'Classes/PHPExcel/Writer/Excel2007.php';
-
 
 /**
  * Setup all the various workbooks to generate, including the composite
@@ -98,23 +96,24 @@ $book_ancilliary->setActiveSheetIndex(0);
 /**
  * Write all the files to disk
  */		
-$objWriter = new PHPExcel_Writer_Excel2007($book_composite);
-$objWriter->save(OUTPUT_PATH . 'all_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_composite);
+$writer->save(OUTPUT_PATH . 'all_datafield_descriptions.xlsx');
 
-$objWriter = new PHPExcel_Writer_Excel2007($book_raw);
-$objWriter->save(OUTPUT_PATH . 'status_intensity_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_raw);
+$writer->save(OUTPUT_PATH . 'status_intensity_datafield_descriptions.xlsx');
 
-$objWriter = new PHPExcel_Writer_Excel2007($book_individual_summarize);
-$objWriter->save(OUTPUT_PATH . 'individual_phenometrics_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_individual_summarize);
+$writer->save(OUTPUT_PATH . 'individual_phenometrics_datafield_descriptions.xlsx');
 
-$objWriter = new PHPExcel_Writer_Excel2007($book_site_summarize);
-$objWriter->save(OUTPUT_PATH . 'site_phenometrics_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_site_summarize);
+$writer->save(OUTPUT_PATH . 'site_phenometrics_datafield_descriptions.xlsx');
 
-$objWriter = new PHPExcel_Writer_Excel2007($book_magnitude);
-$objWriter->save(OUTPUT_PATH . 'magnitude_phenometrics_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_magnitude);
+$writer->save(OUTPUT_PATH . 'magnitude_phenometrics_datafield_descriptions.xlsx');
 
-$objWriter = new PHPExcel_Writer_Excel2007($book_ancilliary);
-$objWriter->save(OUTPUT_PATH . 'ancillary_datafield_descriptions.xlsx');
+$writer = new Xlsx($book_ancilliary);
+$writer->save(OUTPUT_PATH . 'ancillary_datafield_descriptions.xlsx');
+
 
 
 /**
@@ -122,7 +121,7 @@ $objWriter->save(OUTPUT_PATH . 'ancillary_datafield_descriptions.xlsx');
  * attributes
  */
 function createWorkbook($title, $subject, $description){
-    $object = new PHPExcel();
+    $object = new Spreadsheet();
     $object->getProperties()->setCreator(AUTHOR);
     $object->getProperties()->setLastModifiedBy(AUTHOR);
 
@@ -165,8 +164,8 @@ function addHeaders(&$object){
             'name'  => 'Calibri'
         ),
         'alignment' => array(
-            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-            'vertical' => PHPExcel_Style_Alignment::VERTICAL_TOP
+            'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP
         )            
     );    
     
@@ -223,7 +222,7 @@ function fetchWriteData($type, &$object){
      */
     $styleArray = array(
         'alignment' => array(
-            'vertical' => PHPExcel_Style_Alignment::VERTICAL_BOTTOM
+            'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM
         )            
     );    
     
